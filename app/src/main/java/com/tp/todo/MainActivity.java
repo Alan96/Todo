@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_add_todo);
 
+
         Spinner list = findViewById(R.id.list);
 
         // Permet de remplir la liste déroulante
