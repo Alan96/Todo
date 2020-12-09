@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Todo</string>
     <string name="addTask">Ajouter une tâche :</string>
-    <string name="SubmitButton">Valider</string>
+    <string name="submitButton">Valider</string>
+    <string name="cancelButton">Annuler</string>
 </resources>
