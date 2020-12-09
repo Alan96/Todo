@@ -18,11 +18,20 @@
               app:layout_constraintHorizontal_bias="0.5"
 ></TextView>
 
+    <EditText android:layout_width="200dp" android:layout_height="wrap_content"
+              android:id="@+id/getTask"
+              app:layout_constraintStart_toStartOf="@id/addTask"
+              app:layout_constraintEnd_toEndOf="@id/addTask"
+              app:layout_constraintTop_toBottomOf="@id/addTask"
+
+></EditText>
+
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:id="@+id/buttonTask"
-            app:layout_constraintTop_toBottomOf="@id/addTask"
-            app:layout_constraintStart_toStartOf="@id/addTask"
-            app:layout_constraintEnd_toEndOf="@id/addTask"
+            android:text="@string/SubmitButton"
+            app:layout_constraintTop_toBottomOf="@id/getTask"
+            app:layout_constraintStart_toStartOf="@id/getTask"
+            app:layout_constraintEnd_toEndOf="@id/getTask"
             ></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
