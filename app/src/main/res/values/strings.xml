@@ -2,4 +2,11 @@
     <string name="app_name">Todo</string>
     <string name="addTask">Ajouter une tâche :</string>
     <string name="SubmitButton">Valider</string>
+    
+    <string-array name="importance">
+        <item>Pas urgent</item>
+        <item>Urgent</item>
+        <item>Très urgent</item>
+    </string-array>
+    
 </resources>
