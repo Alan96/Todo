@@ -17,15 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:background="#269"
-        android:padding="15dp"
         android:id="@+id/tvt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/importance1"
+        android:padding="15dp"
         android:text="Tache 2"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvt1"
-        android:layout_marginTop="15dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvt1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

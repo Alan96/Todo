@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTodoActivity">
+    tools:context=".AddTodoActivity"
+    android:id="@+id/VTodo">
 
     <TextView
         android:id="@+id/addTask"
@@ -41,25 +42,26 @@
 
 
     <Button
+        android:id="@+id/submitButton"
+        android:onClick="addTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/submitButton"
+        android:layout_marginTop="80px"
         android:text="@string/SubmitButton"
-        app:layout_constraintTop_toBottomOf="@+id/list"
-        app:layout_constraintStart_toStartOf="@+id/list"
         app:layout_constraintEnd_toEndOf="@+id/list"
-        android:layout_marginTop="80px" />
+        app:layout_constraintStart_toStartOf="@+id/list"
+        app:layout_constraintTop_toBottomOf="@+id/list" />
 
 
     <Button
+        android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonCancel"
+        android:layout_marginTop="80px"
         android:text="@string/cancelButton"
-        app:layout_constraintTop_toBottomOf="@id/submitButton"
-        app:layout_constraintStart_toStartOf="@id/submitButton"
         app:layout_constraintEnd_toEndOf="@id/submitButton"
-        android:layout_marginTop="80px" />
+        app:layout_constraintStart_toStartOf="@id/submitButton"
+        app:layout_constraintTop_toBottomOf="@id/submitButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

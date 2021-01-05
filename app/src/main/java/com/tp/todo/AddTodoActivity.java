@@ -1,7 +1,10 @@
 package com.tp.todo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 public class AddTodoActivity extends AppCompatActivity {
 
@@ -11,4 +14,5 @@ public class AddTodoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_todo);
 
     }
+
 }
