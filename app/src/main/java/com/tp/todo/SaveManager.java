@@ -7,8 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SaveManager {
 
@@ -72,7 +77,27 @@ public class SaveManager {
     }
 
 
-    public void saveData() {
+    public void saveData() throws IOException, JSONException {
+
+        JSONObject obj = new JSONObject();
+        obj.put("name", "test");
+
+
+        FileWriter fileWriter = new FileWriter("C:\\Users\\Thoma\\AndroidStudioProjects\\Todo\\app\\src\\main\\todoTasks.json");
+        fileWriter.write(obj.toString());
+
+
+        try {
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+        Log.e("MainActivity", "GOOD");
+
 
         //TODO Faire le systeme de sauvegarde de données
     }

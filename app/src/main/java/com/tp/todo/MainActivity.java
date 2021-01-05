@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,9 +25,14 @@ public class MainActivity extends AppCompatActivity {
         listAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         list.setAdapter(listAdapter);
 
-        SaveManager saveManager = new SaveManager(this);
+       // SaveManager saveManager = new SaveManager(this);
 
-        saveManager.displayAllSaveData();
+        //saveManager.displayAllSaveData();
+      //  try {
+         //   saveManager.saveData();
+       // } catch (IOException | JSONException e) {
+        //    e.printStackTrace();
+       // }
 
     }
 }
