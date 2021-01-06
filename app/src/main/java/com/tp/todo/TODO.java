@@ -10,8 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 public class TODO extends AppCompatActivity {
 
 
-    static int ID = 0;
-    static int margin= 0;
+    static int ID = 5000000;
     int id;
     String nom;
     String urgency;
