@@ -7,10 +7,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class TODO extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class TODO {
 
 
     static int ID = 5000000;
+    static ArrayList<TODO> todos = new ArrayList<TODO>();
     int id;
     String nom;
     String urgency;
@@ -48,10 +51,25 @@ public class TODO extends AppCompatActivity {
         this.urgency = urgency;
     }
 
-    public int getUrgencyColor(){
+    public static void addTodo(TODO todo) {
+        todos.add(todo);
+    }
+
+    public static void deleteTodo(int ID) {
+
+        for (TODO todo : TODO.todos) {
+
+            if (todo.getId() == ID) {
+                TODO.todos.remove(todo);
+            }
+        }
+
+    }
+
+    public int getUrgencyColor() {
         int colorName = R.color.importance1;
 
-        switch (this.urgency){
+        switch (this.urgency) {
             case "Pas urgent":
                 colorName = R.color.importance1;
                 break;
@@ -65,16 +83,15 @@ public class TODO extends AppCompatActivity {
 
         return colorName;
     }
-
-
-    public void generateTextView(){
-        ConstraintLayout container = (ConstraintLayout) findViewById(R.id.VTodo);
-
-        TextView todo = new TextView(this);
-        todo.setText(getNom());
-        todo.setBackgroundColor(getResources().getColor(getUrgencyColor()));
-
-        container.addView(todo);
-    }
+//
+//    public void generateTextView(){
+//        ConstraintLayout container = (ConstraintLayout) findViewById(R.id.VTodo);
+//
+//        TextView todo = new TextView(this);
+//        todo.setText(getNom());
+//        todo.setBackgroundColor(getResources().getColor(getUrgencyColor()));
+//
+//        container.addView(todo);
+//    }
 
 }

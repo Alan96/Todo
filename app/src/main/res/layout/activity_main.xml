@@ -4,28 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/Vlist" >
 
-    <TextView
-        android:id="@+id/tvt1"
+
+    <Button
+        android:id="@+id/retour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tache 1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="80px"
+        android:text="Ajouter une tache"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvtitle"
+        android:layout_marginBottom="20dp"/>
+
 
     <TextView
-        android:id="@+id/tvt2"
+        android:id="@+id/tvtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:background="@color/importance1"
-        android:padding="15dp"
-        android:text="Tache 2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvt1" />
+        android:text="Liste de taches :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="125dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
