@@ -5,20 +5,23 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.annotation.SuppressLint;
+
+import android.content.Context;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import android.widget.TextView;
+
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private int lastTodoIdCreated = 0;
+    public static int lastTodoIdCreated = 0;
 
 
     @Override
@@ -51,9 +54,16 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     public void displayTodos() {
 
+        try {
+            TODO.restoreTodos(this);
+        } catch (IOException e) {
+
+        }
+
         final ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.Vlist);
         TextView title = findViewById(R.id.tvtitle);
         title.setText("Liste de tâches (" + TODO.todos.size() + ") : ");
+        lastTodoIdCreated = 0;
 
         for (TODO task : TODO.todos) {
 
@@ -66,13 +76,17 @@ public class MainActivity extends AppCompatActivity {
 
             constraintLayout.addView(todo);
             centerTodo(task, constraintLayout);
+            //lastTodoIdCreated = TODO.todos.get((TODO.todos.size() - 1)).getId();
 
-            this.lastTodoIdCreated = task.getId();
+            lastTodoIdCreated = task.getId();
+
+            final Context context = this;
 
             todo.setOnClickListener(new View.OnClickListener() { // Supprime la tache quand on clique dessus
                 @Override
                 public void onClick(View v) {
                     TODO.deleteTodo(todo.getId());
+                    TODO.saveTodos(context);
                     recreate();
                 }
             });
@@ -83,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
     private void centerTodo(TODO task, ConstraintLayout constraintLayout) {
         int lastId;
 
-        if (this.lastTodoIdCreated == 0) {
+        if (lastTodoIdCreated == 0) {
             lastId = R.id.tvtitle;
         } else {
-            lastId = this.lastTodoIdCreated;
+            lastId = lastTodoIdCreated;
         }
 
         ConstraintSet constraintSet = new ConstraintSet();

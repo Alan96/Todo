@@ -1,13 +1,20 @@
 package com.tp.todo;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
 
 public class TODO {
 
@@ -33,6 +40,10 @@ public class TODO {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -84,15 +95,61 @@ public class TODO {
 
         return colorName;
     }
-//
-//    public void generateTextView(){
-//        ConstraintLayout container = (ConstraintLayout) findViewById(R.id.VTodo);
-//
-//        TextView todo = new TextView(this);
-//        todo.setText(getNom());
-//        todo.setBackgroundColor(getResources().getColor(getUrgencyColor()));
-//
-//        container.addView(todo);
-//    }
+
+    public static void saveTodos(Context context) {
+
+        Gson gson = new Gson();
+
+        String jsonTodos = gson.toJson(TODO.todos);
+
+        File dir = new File(context.getFilesDir(), "files");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        try {
+            File saveFile = new File(dir, "saveTodo.json");
+            FileWriter writer = new FileWriter(saveFile);
+            writer.write(jsonTodos);
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void restoreTodos(Context context) throws IOException {
+        Gson gson = new Gson();
+        File dir = new File(context.getFilesDir(), "files");
+        File saveFile = new File(dir, "saveTodo.json");
+
+        BufferedReader reader = new BufferedReader(new FileReader(saveFile));
+
+        String resultJson = "";
+        String line;
+        while ((line = reader.readLine()) != null) {
+            resultJson += line;
+        }
+        reader.close();
+
+        JsonArray jsonArray = (JsonArray) new JsonParser().parse((resultJson.toString()));
+
+        Type todoType = new TypeToken<ArrayList<TODO>>() {
+        }.getType();
+
+        todos = gson.fromJson(jsonArray, todoType);
+
+        for (int i = 0; i < TODO.todos.size(); i++){
+            todos.get(i).setId(5000000 + i);
+        }
+
+        //MainActivity.lastTodoIdCreated = TODO.todos.get((TODO.todos.size() - 1)).getId();
+
+//        if (TODO.todos.size() > 1) {
+//            todos.get(0).setId(5000000);
+//            ID = TODO.todos.get((TODO.todos.size() - 1)).getId();
+
+//        }
+    }
 
 }
