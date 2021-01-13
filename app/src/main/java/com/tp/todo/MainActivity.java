@@ -7,13 +7,13 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,77 +22,61 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menuAdd) {
+            Intent intent = new Intent(this, AddTodoActivity.class);
+            startActivity(intent);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner list = findViewById(R.id.list);
-
-        Button test = findViewById(R.id.retour);
-
-
-        final Intent intent = new Intent(this, AddTodoActivity.class);
-
-        test.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
-
         displayTodos();
     }
+
 
     @SuppressLint("ResourceType")
     public void displayTodos() {
 
         final ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.Vlist);
+        TextView title = findViewById(R.id.tvtitle);
+        title.setText("Liste de tâches (" + TODO.todos.size() + ") : ");
 
         for (TODO task : TODO.todos) {
 
-            if (TODO.todos.size() < 1) {
-                Toast toast = Toast.makeText(this, "Rien a afficher", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
             final TextView todo = new TextView(this);
-            todo.setText(task.getNom());
+            todo.setText(task.getNom() + " // " + task.getUrgency());
             todo.setBackgroundColor(getResources().getColor(task.getUrgencyColor()));
             todo.setId(task.getId());
-            todo.setPadding(150, 8, 150, 8);
-
-//            final Button btn = new Button(this);
-//            btn.setText("Supprimer");
-//            btn.setId(task.getId() + 1000);
-//            btn.setTextSize(12);
-//            btn.setHeight(todo.getHeight());
+            todo.setPadding(300, 15, 300, 15);
+            todo.setTextColor(getResources().getColor(R.color.black));
 
             constraintLayout.addView(todo);
-            //constraintLayout.addView(btn);
+            centerTodo(task, constraintLayout);
+
+            this.lastTodoIdCreated = task.getId();
 
             todo.setOnClickListener(new View.OnClickListener() { // Supprime la tache quand on clique dessus
                 @Override
                 public void onClick(View v) {
                     TODO.deleteTodo(todo.getId());
-                    constraintLayout.removeView(todo);
+                    recreate();
                 }
             });
-
-//
-//            btn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Log.e("Button : ", String.valueOf((btn.getId() - 1000)));
-//                }
-//            });
-
-           // centerTodo(task, btn, constraintLayout);
-           centerTodo(task, constraintLayout);
-            this.lastTodoIdCreated = task.getId();
         }
-
-
     }
 
 
@@ -107,15 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(constraintLayout);
-        constraintSet.connect(task.getId(), ConstraintSet.TOP, lastId, ConstraintSet.BOTTOM, 50);
+        constraintSet.connect(task.getId(), ConstraintSet.TOP, lastId, ConstraintSet.BOTTOM, 60);
         constraintSet.connect(task.getId(), ConstraintSet.START, constraintLayout.getId(), ConstraintSet.START, 0);
         constraintSet.connect(task.getId(), ConstraintSet.END, constraintLayout.getId(), ConstraintSet.END, 0);
-//
-//        constraintSet.connect(btn.getId(), ConstraintSet.START, task.getId(), ConstraintSet.END, 30);
-//        constraintSet.connect(btn.getId(), ConstraintSet.TOP, task.getId(), ConstraintSet.TOP, 0);
-//        constraintSet.connect(btn.getId(), ConstraintSet.BOTTOM, task.getId(), ConstraintSet.BOTTOM, 0);
-//        constraintSet.applyTo(constraintLayout);
+
+        constraintSet.applyTo(constraintLayout);
     }
-
-
 }

@@ -3,9 +3,12 @@ package com.tp.todo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +46,7 @@ public class AddTodoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //setContentView(R.layout.activity_main);
                 startActivity(intent);
+
             }
         });
 
@@ -58,25 +62,33 @@ public class AddTodoActivity extends AppCompatActivity {
         String name = input.getText().toString();
         String urgency = list.getSelectedItem().toString();
 
-
         if (name.length() < 3) {
             Toast toast = Toast.makeText(this, "Votre TODO doit contenir au moins 3 caractères", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
 
-
         TODO task = new TODO(name, urgency);
 
         TODO.addTodo(task);
-
         input.setText("");
+        hideKeyboard(this);
         Toast toast = Toast.makeText(this, "Tâche ajoutée !", Toast.LENGTH_SHORT);
         toast.show();
     }
 
 
-
+    // Fonction qui cache le clavier (trouvé sur internet)
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 
 }

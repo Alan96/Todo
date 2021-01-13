@@ -61,6 +61,7 @@ public class TODO {
 
             if (todo.getId() == ID) {
                 TODO.todos.remove(todo);
+                return;
             }
         }
 
