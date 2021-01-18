@@ -143,13 +143,6 @@ public class TODO {
             todos.get(i).setId(5000000 + i);
         }
 
-        //MainActivity.lastTodoIdCreated = TODO.todos.get((TODO.todos.size() - 1)).getId();
-
-//        if (TODO.todos.size() > 1) {
-//            todos.get(0).setId(5000000);
-//            ID = TODO.todos.get((TODO.todos.size() - 1)).getId();
-
-//        }
     }
 
 }

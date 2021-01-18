@@ -3,6 +3,7 @@
     <string name="addTask">Ajouter une tâche :</string>
     <string name="SubmitButton">Valider</string>
     <string name="cancelButton">Retour</string>
+    <string name="todoInfos">Appuyez sur les todos pour les supprimer</string>
 
     <string-array name="importance">
         <item>Pas urgent</item>
